@@ -1,39 +1,80 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export type BasketItem = {
-  id: string
-  name: string
-  price: number
-  quantity: number
+// import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+// import { BasketItem } from '../../types';
+
+// interface BasketState {
+//   items: BasketItem[];
+// }
+
+// const initialState: BasketState = {
+//   items: [],
+// };
+
+// const basketSlice = createSlice({
+//   name: 'basket',
+//   initialState,
+//   reducers: {
+//     addItem: (state, action: PayloadAction<BasketItem>) => {
+//       const existing = state.items.find(i => i.id === action.payload.id);
+//       if (existing) {
+//         existing.quantity += action.payload.quantity;
+//       } else {
+//         state.items.push(action.payload);
+//       }
+//     },
+//     changeQty: (state, action: PayloadAction<{ id: string; qty: number }>) => {
+//       const item = state.items.find(i => i.id === action.payload.id);
+//       if (item) {
+//         item.quantity = action.payload.qty;
+//         if (item.quantity <= 0) {
+//           state.items = state.items.filter(i => i.id !== action.payload.id);
+//         }
+//       }
+//     },
+//   },
+// });
+
+// export const { addItem, changeQty } = basketSlice.actions;
+// export default basketSlice.reducer;
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { BasketItem } from '../../types';
+
+interface BasketState {
+  items: BasketItem[];
 }
 
-const initialState: BasketItem[] = []
+const initialState: BasketState = {
+  items: [],
+};
 
 const basketSlice = createSlice({
   name: 'basket',
   initialState,
   reducers: {
-    addItem(state, action: PayloadAction<BasketItem>) {
-      const item = state.find(i => i.id === action.payload.id)
-      if (item) {
-        item.quantity += 1
+    // Add item to basket
+    addItem: (state, action: PayloadAction<BasketItem>) => {
+      const existing = state.items.find(i => i.id === action.payload.id);
+      if (existing) {
+        existing.quantity += action.payload.quantity;
       } else {
-        state.push({ ...action.payload, quantity: 1 })
+        state.items.push(action.payload);
       }
     },
-    changeQty(state, action: PayloadAction<{ id: string; qty: number }>) {
-  const index = state.findIndex(i => i.id === action.payload.id)
 
-  if (index !== -1) {
-    if (action.payload.qty <= 0) {
-      state.splice(index, 1) 
-    } else {
-      state[index].quantity = action.payload.qty
-    }
-  }
-}
+    // Change quantity (increment/decrement)
+    changeQty: (state, action: PayloadAction<{ id: string; qty: number }>) => {
+      const item = state.items.find(i => i.id === action.payload.id);
+      if (item) {
+        item.quantity = action.payload.qty;
+
+        // Remove item if quantity <= 0
+        if (item.quantity <= 0) {
+          state.items = state.items.filter(i => i.id !== action.payload.id);
+        }
+      }
+    },
   },
-})
+});
 
-export const { addItem, changeQty } = basketSlice.actions
-export default basketSlice.reducer
+export const { addItem, changeQty } = basketSlice.actions;
+export default basketSlice.reducer;

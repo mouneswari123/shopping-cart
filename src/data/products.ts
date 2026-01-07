@@ -5,3 +5,4 @@ export const products = [
   { id: 'soup', name: 'Soup', price: 0.6 },
   { id: 'butter', name: 'Butter', price: 1.2 },
 ]
+

@@ -1,34 +1,86 @@
-import { useSelector } from 'react-redux'
-import { calculateBill } from '../features/basket/selectors'
-import '../styles/basket.css'
-import BasketItem from './BasketItem'
+// import { useSelector } from 'react-redux';
+// import {
+//   selectItems,
+//   selectSubtotal,
+//   selectTotalSavings,
+//   selectTotal,
+// } from '../features/basket/selectors';
+// import '../styles/basket.css';
 
+// export default function Basket() {
+//   const items = useSelector(selectItems);
+//   const subtotal = useSelector(selectSubtotal);
+//   const savings = useSelector(selectTotalSavings);
+//   const total = useSelector(selectTotal);
 
+//   return (
+//     <div className="basket">
+//       <h2>Basket</h2>
+
+//       {items.map(i => (
+//         <div key={i.id} className="basket-item">
+//           {i.name} x {i.quantity} = £{(i.price * i.quantity).toFixed(2)}
+//         </div>
+//       ))}
+
+//       <hr />
+//       <p>Subtotal: £{subtotal.toFixed(2)}</p>
+//       <p className="saving">Savings: £{savings.toFixed(2)}</p>
+//       <h3>Total: £{total.toFixed(2)}</h3>
+//     </div>
+//   );
+// }
+// src/components/Basket.tsx
+import { useSelector } from 'react-redux';
+import {
+  selectItems,
+  selectSubtotal,
+  selectOffers,
+  selectTotalSavings,
+  selectTotal,
+} from '../features/basket/selectors';
+import BasketItem from './BasketItem';
+import '../styles/basket.css';
 
 export default function Basket() {
-  const items = useSelector((state: any) => state.basket)
-  const { subtotal, savings, total } = calculateBill(items)
+  const items = useSelector(selectItems);
+  const subtotal = useSelector(selectSubtotal);
+  const offers = useSelector(selectOffers);
+  const savings = useSelector(selectTotalSavings);
+  const total = useSelector(selectTotal);
 
   return (
     <div className="basket">
       <h2>Basket</h2>
 
-      {items.map((i: any) => (
-        <div key={i.id} className="basket-item">
-          {i.name} x {i.quantity} = £{(i.price * i.quantity).toFixed(2)}
-        </div>
-      ))}
-        {items.map((i: any) => (
+      {/* Basket items with quantity controls */}
+      {items.map(i => (
         <BasketItem key={i.id} item={i} />
-        ))}
-        <hr />
-        <div className="total-box">
-         <h2>Total: £{total.toFixed(2)}</h2>
-         </div>
+      ))}
 
+      <hr />
+
+      {/* Step 1: Subtotal */}
       <p>Subtotal: £{subtotal.toFixed(2)}</p>
-      <p className="saving">Savings: £{savings.toFixed(2)}</p>
+
+      {/* Step 2: Special offers */}
+      {offers.length > 0 ? (
+        <div>
+          <p className="saving">Special offers applied:</p>
+          <ul>
+            {offers.map((o, idx) => (
+              <li key={idx}>
+                {o.title}: -£{o.saving.toFixed(2)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <p>No special offers applied</p>
+      )}
+
+      {/* Step 3: Final total */}
       <h3>Total: £{total.toFixed(2)}</h3>
     </div>
-  )
+  );
 }

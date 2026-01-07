@@ -9,3 +9,4 @@ export const soupBreadOffer = (
 
 export const butterOffer = (qty: number, price: number) =>
   qty * (price / 3)
+
