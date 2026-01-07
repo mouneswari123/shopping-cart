@@ -26,7 +26,7 @@ const basketSlice = createSlice({
 
   if (index !== -1) {
     if (action.payload.qty <= 0) {
-      state.splice(index, 1) // remove item
+      state.splice(index, 1) 
     } else {
       state[index].quantity = action.payload.qty
     }

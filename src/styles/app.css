@@ -1,4 +1,21 @@
-.container {
-  display: flex;
-  gap: 20px;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+
+  background-image: url('../assets/vegtable.jpg');
+  background-size: cover;        /* full screen */
+  background-position: center;   /* center image */
+  background-repeat: no-repeat;  /* no repeat */
+  background-attachment: fixed;  /* smooth scroll */
+
+  min-height: 100vh;
 }
+.container {
+  max-width: 11500px;
+  margin: auto;
+  padding: 55px;
+  display: flex;
+  gap: 30px;
+  align-items: flex-start; /* IMPORTANT */
+}
+

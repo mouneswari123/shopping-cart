@@ -22,7 +22,10 @@ export default function Basket() {
         <BasketItem key={i.id} item={i} />
         ))}
         <hr />
-        
+        <div className="total-box">
+         <h2>Total: £{total.toFixed(2)}</h2>
+         </div>
+
       <p>Subtotal: £{subtotal.toFixed(2)}</p>
       <p className="saving">Savings: £{savings.toFixed(2)}</p>
       <h3>Total: £{total.toFixed(2)}</h3>
