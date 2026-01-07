@@ -47,6 +47,7 @@ export default function Basket() {
   const subtotal = useSelector(selectSubtotal);
   const offers = useSelector(selectOffers);
   const savings = useSelector(selectTotalSavings);
+
   const total = useSelector(selectTotal);
 
   return (
@@ -66,7 +67,8 @@ export default function Basket() {
       {/* Step 2: Special offers */}
       {offers.length > 0 ? (
         <div>
-          <p className="saving">Special offers applied:</p>
+          <p className="saving">Savings: £{savings.toFixed(2)}</p>
+
           <ul>
             {offers.map((o, idx) => (
               <li key={idx}>
