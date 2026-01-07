@@ -1,0 +1,14 @@
+.products {
+  width: 40%;
+  padding: 20px;
+}
+
+.product {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 5px 10px;
+}

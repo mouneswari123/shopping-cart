@@ -1,0 +1,29 @@
+.basket {
+  width: 60%;
+  padding: 20px;
+  background: #f9f9f9;
+}
+
+.basket-item {
+  margin-bottom: 8px;
+}
+
+.saving {
+  color: red;
+}
+.basket-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.qty {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.qty button {
+  padding: 2px 8px;
+}
